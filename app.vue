@@ -3,7 +3,7 @@ useHead({
   title: 'Create a new post',
 })
 
-const isLoading = ref(true)
+const isLoading = useUseMagicTitle('postBody')
 </script>
 
 <template>
@@ -12,6 +12,7 @@ const isLoading = ref(true)
       <FormKit
         type="textarea"
         name="post"
+        id="postBody"
         label="Blog post"
         help="Enter you blog post here, markdown formatting is acceptable."
         validation="required"
