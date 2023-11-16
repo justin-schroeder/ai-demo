@@ -1,5 +1,7 @@
+<script setup lang="ts"></script>
+
 <template>
-  <div>
+  <PostEditor>
     <FormKit type="textarea" name="post" />
-  </div>
+  </PostEditor>
 </template>
