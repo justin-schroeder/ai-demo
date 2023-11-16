@@ -16,6 +16,7 @@ const isLoading = useUseMagicTitle('postBody')
         label="Blog post"
         help="Enter you blog post here, markdown formatting is acceptable."
         validation="required"
+        auto-height
       />
       <FormKit
         type="text"
