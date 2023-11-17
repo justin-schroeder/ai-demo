@@ -1,0 +1,18 @@
+<template #help="{ help, suggestion, classes, node, value }">
+  <div :class="classes.help">
+    {{ help }}
+  </div>
+  <button
+    v-if="suggestion && suggestion !== value && !isLoading"
+    type="button"
+    class="text-xs"
+    @click="node.input(suggestion)"
+  >
+    Use suggestion: “{{ suggestion }}”
+  </button>
+  <FormKitIcon
+    v-else-if="isLoading"
+    icon="spinner"
+    class="block animate-spin w-3 mt-1"
+  />
+</template>

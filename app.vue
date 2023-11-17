@@ -1,16 +1,30 @@
 <script setup lang="ts">
+import { FormKitIcon } from '@formkit/vue'
 useHead({
   title: 'Create a new post',
 })
 
-const isLoading = useUseMagicTitle('postBody')
+async function submitHandler(_data, node) {
+  // Simulate an api request
+  await new Promise((resolve) => setTimeout(resolve, 2000))
+  alert('Good job! You created a new post.')
+  node.reset()
+}
+
+const isLoading = ref(false)
 </script>
 
 <template>
   <PostEditor>
-    <FormKit type="form" #default="{ state: { valid } }" :actions="false">
+    <FormKit
+      type="form"
+      #default="{ state: { valid, loading } }"
+      :actions="false"
+      @submit="submitHandler"
+    >
       <FormKit
         type="textarea"
+        :delay="500"
         name="post"
         id="postBody"
         label="Blog post"
@@ -23,8 +37,6 @@ const isLoading = useUseMagicTitle('postBody')
         name="title"
         label="Title"
         help="Enter a title for your blog post."
-        :prefix-icon="isLoading ? 'spinner' : null"
-        prefix-icon-class="animate-spin"
         validation="required"
       />
       <FormKit
@@ -32,14 +44,12 @@ const isLoading = useUseMagicTitle('postBody')
         name="slug"
         label="Slug"
         help="Enter a unique page slug for your blog post."
-        :prefix-icon="isLoading ? 'spinner' : null"
-        prefix-icon-class="animate-spin"
         validation="required"
       />
       <FormKit
         type="submit"
         label="Save post"
-        :disabled="isLoading || !valid"
+        :disabled="isLoading || loading || !valid"
       />
     </FormKit>
   </PostEditor>
